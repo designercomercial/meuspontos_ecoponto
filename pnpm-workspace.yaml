@@ -1,0 +1,7 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+# esbuild (usado por tsx e Vite) precisa do script de instalação.
+allowBuilds:
+  esbuild: true

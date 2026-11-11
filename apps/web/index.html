@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Meus Pontos – EcoPonto</title>
+  <meta name="description" content="Saldo, cota do mês e histórico do EcoPonto da Prefeitura de Boa Vista.">
+  <meta name="theme-color" content="#025790">
+  <script>
+    // Aplica o tema salvo antes de pintar a página, para não piscar.
+    try {
+      var t = localStorage.getItem("tema");
+      if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+    } catch (e) {}
+    // Começa a buscar o resumo enquanto o JS baixa (meta T20: menos de 2 s).
+    try {
+      if (!/\/recibo\//.test(location.pathname)) {
+        window.__ecoResumo = fetch("/api/cidadao/pontos/resumo", {
+          credentials: "same-origin",
+          headers: { Accept: "application/json" }
+        });
+        window.__ecoResumo.catch(function () {});
+      }
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <span class="site-header__logo" aria-hidden="true">
+        <!-- Lucide: recycle -->
+        <svg class="icon" viewBox="0 0 24 24">
+          <path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"/>
+          <path d="M11 19h8.203a1.83 1.83 0 0 0 1.556-.89 1.784 1.784 0 0 0 0-1.775l-1.226-2.12"/>
+          <path d="m14 16-3 3 3 3"/>
+          <path d="M8.293 13.596 7.196 9.5 3.1 10.598"/>
+          <path d="m9.344 5.811 1.093-1.892A1.83 1.83 0 0 1 11.985 3a1.784 1.784 0 0 1 1.546.888l3.943 6.843"/>
+          <path d="m13.378 9.633 4.096 1.098 1.097-4.096"/>
+        </svg>
+      </span>
+      <div class="site-header__titles">
+        <h1 class="site-header__title">Meus Pontos</h1>
+        <p class="site-header__subtitle">EcoPonto · Prefeitura de Boa Vista</p>
+      </div>
+      <button type="button" class="icon-button" id="theme-toggle" aria-label="Usar tema escuro">
+        <!-- Lucide: moon -->
+        <svg class="icon" data-icon="moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/>
+        </svg>
+        <!-- Lucide: sun -->
+        <svg class="icon" data-icon="sun" viewBox="0 0 24 24" aria-hidden="true" hidden>
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2"/><path d="M12 20v2"/>
+          <path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/>
+          <path d="M2 12h2"/><path d="M20 12h2"/>
+          <path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
+        </svg>
+      </button>
+    </div>
+    <div class="brand-stripe" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+  </header>
+
+  <div id="app"></div>
+
+  <noscript><p class="noscript">Para ver seus pontos, ative o JavaScript.</p></noscript>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

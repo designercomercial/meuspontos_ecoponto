@@ -1,0 +1,27 @@
+{
+  "name": "@ecoponto/web",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@ecoponto/contracts": "workspace:*",
+    "@ecoponto/format": "workspace:*",
+    "@ecoponto/observability": "workspace:*",
+    "@ecoponto/tokens": "workspace:*",
+    "@sentry/browser": "^11.11.0",
+    "lucide": "^1.71.0"
+  },
+  "devDependencies": {
+    "@ecoponto/api": "workspace:*",
+    "@playwright/test": "^1.65.0",
+    "happy-dom": "^21.0.4",
+    "vite": "^8.3.7"
+  }
+}
